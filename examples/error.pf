@@ -1,0 +1,2 @@
+# The error happens inside a parallel branch and is reported back.
+let (a, b) = par(10 / 0, 5) in a + b

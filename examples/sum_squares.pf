@@ -1,0 +1,11 @@
+# Sum of i*i for i in [lo, hi), split in half until the range is small.
+let rec sum_sq lo hi =
+  if hi - lo <= 64 then
+    let rec loop i acc = if i >= hi then acc else loop (i + 1) (acc + i * i) in
+    loop lo 0
+  else
+    let mid = (lo + hi) / 2 in
+    let (left, right) = par(sum_sq lo mid, sum_sq mid hi) in
+    left + right
+in
+sum_sq 0 200000

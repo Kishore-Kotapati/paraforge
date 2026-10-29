@@ -1,0 +1,98 @@
+PARAFORGE REPORT (measured, rule based)  - 137 result rows, 2 cores
+
+Best configuration per workload:
+  bfs-grid               static     2 threads  speedup  0.21  efficiency 0.11
+  bfs-random             stealing   2 threads  speedup  0.84  efficiency 0.42
+  bfs-random-racy        stealing   4 threads  speedup  0.57  efficiency 0.14
+  bfs-skewed             shared     8 threads  speedup  0.84  efficiency 0.10
+  chess-middle-d5        shared     2 threads  speedup  1.87  efficiency 0.93
+  chess-start-d5         shared     4 threads  speedup  1.56  efficiency 0.39
+  lang-cut1              stealing   8 threads  speedup  1.20  efficiency 0.15
+  lang-cut12             stealing   8 threads  speedup  1.12  efficiency 0.14
+  lang-cut16             stealing   8 threads  speedup  1.13  efficiency 0.14
+  lang-cut20             stealing   8 threads  speedup  0.89  efficiency 0.11
+  lang-cut4              stealing   8 threads  speedup  1.13  efficiency 0.14
+  lang-cut8              stealing   8 threads  speedup  1.17  efficiency 0.15
+  lang-fib24             stealing   4 threads  speedup  1.23  efficiency 0.31
+  matrix-n128            stealing   8 threads  speedup  1.75  efficiency 0.22
+  matrix-n16             stealing   8 threads  speedup  0.20  efficiency 0.02
+  matrix-n256            stealing   8 threads  speedup  1.87  efficiency 0.23
+  matrix-n32             stealing   8 threads  speedup  0.63  efficiency 0.08
+  matrix-n512            stealing   2 threads  speedup  1.95  efficiency 0.98
+  matrix-n64             stealing   8 threads  speedup  1.30  efficiency 0.16
+  swarm-4000             static     4 threads  speedup  1.66  efficiency 0.42
+
+Findings (38):
+  [bfs-grid] more threads than cores did not help
+      - best speedup with <= 2 threads 0.21, with more 0.13
+  [bfs-grid] slower than sequential
+      - static, 2 threads: speedup 0.21
+      - shared, 2 threads: speedup 0.10
+      - stealing, 2 threads: speedup 0.12
+  [bfs-grid] static split slower than work stealing
+      - 8 threads: 47.8 ms vs 35.4 ms
+  [bfs-grid] workers spent a lot of time idle
+      - static, 2 threads: idle 26.6%
+      - shared, 1 threads: idle 23.6%
+      - shared, 2 threads: idle 37.6%
+      - stealing, 1 threads: idle 25.6%
+      - ... 1 more
+  [bfs-random] more threads than cores did not help
+      - best speedup with <= 2 threads 0.84, with more 0.84
+  [bfs-random] slower than sequential
+      - static, 2 threads: speedup 0.81
+      - shared, 2 threads: speedup 0.72
+      - stealing, 2 threads: speedup 0.84
+  [bfs-random] static split slower than work stealing
+      - 4 threads: 53.8 ms vs 42.3 ms
+      - 8 threads: 52.0 ms vs 41.1 ms
+  [bfs-random-racy] race: vertices claimed by two threads
+      - stealing, 2 threads: 11 duplicate visits
+      - stealing, 4 threads: 8 duplicate visits
+      - stealing, 8 threads: 14 duplicate visits
+  [bfs-random-racy] slower than sequential
+      - stealing, 2 threads: speedup 0.52
+  [bfs-skewed] more threads than cores did not help
+      - best speedup with <= 2 threads 0.83, with more 0.84
+  [bfs-skewed] slower than sequential
+      - static, 2 threads: speedup 0.72
+      - shared, 2 threads: speedup 0.83
+      - stealing, 2 threads: speedup 0.78
+  [chess-middle-d5] more threads than cores did not help
+      - best speedup with <= 2 threads 1.87, with more 1.70
+  [chess-middle-d5] parallel search visited extra nodes
+      - static, 8 threads: 1.29x the sequential node count
+  [chess-start-d5] parallel search visited extra nodes
+      - stealing, 8 threads: 1.27x the sequential node count
+  [chess-start-d5] tasks spread unevenly over workers
+      - shared, 2 threads: busiest worker ran 1.58x the average
+  [lang-cut12] deep task nesting inside waits (stack growth)
+      - shared, 8 threads: depth 320
+  [lang-cut16] deep task nesting inside waits (stack growth)
+      - shared, 8 threads: depth 2175
+  [lang-cut20] deep task nesting inside waits (stack growth)
+      - shared, 8 threads: depth 4469
+  [lang-fib24] deep task nesting inside waits (stack growth)
+      - static, 4 threads: depth 126
+      - shared, 2 threads: depth 290
+      - shared, 4 threads: depth 132
+      - shared, 8 threads: depth 123
+  [lang-fib24] more threads than cores did not help
+      - best speedup with <= 2 threads 1.21, with more 1.23
+  [matrix-n512] more threads than cores did not help
+      - best speedup with <= 2 threads 1.95, with more 1.93
+  [swarm-4000] static split slower than work stealing
+      - 2 threads: 54.4 ms vs 41.6 ms
+
+Trace timeline:
+  trace_bfs-skewed.csv: 46297 us, one column = 1157 us
+  worker  0 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@| tasks=  1510 steals=10
+  worker  1 |+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@| tasks=  1821 steals=13
+
+Trace timeline:
+  trace_chess-middle-d5.csv: 53266 us, one column = 1332 us
+  worker  0 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@| tasks=    17 steals=0
+  worker  1 | #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#| tasks=    19 steals=19
+
+No ANTHROPIC_API_KEY set: the measured report above is complete.
+The prompt was saved to ai_prompt.txt if you want to paste it into a chat.

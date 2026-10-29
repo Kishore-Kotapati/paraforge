@@ -1,0 +1,12 @@
+paraforge
+run_tests
+run_tests_tsan
+tictactoe
+__pycache__/
+ai_prompt.txt
+ar_selftest.png
+marker.png
+ocaml/*.cm*
+ocaml/*.o
+ocaml/pfl
+ocaml/domain.ml

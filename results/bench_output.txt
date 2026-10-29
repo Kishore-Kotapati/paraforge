@@ -1,0 +1,140 @@
+hardware threads: 2, reps: 7 (fastest run shown, speedup vs a paired sequential run)
+workload             policy     thr    time_ms  speedup    eff     tasks   steals  idle%  imbal depth  ok  extra
+cache check n=512: i-j-k 322.4 ms, i-k-j 75.0 ms (4.3x)
+matrix-n512          sequential   1      72.94     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n512          static       1      72.22     0.99   0.99         1        0    0.0   1.00     1 yes  
+matrix-n512          static       2      44.08     1.61   0.80         2        0    0.1   1.00     1 yes  
+matrix-n512          static       4      40.04     1.79   0.45         4        0    1.9   1.00     1 yes  
+matrix-n512          static       8      38.05     1.85   0.23         8        0    3.1   1.00     1 yes  
+matrix-n512          shared       1      71.39     1.01   1.01        64        0    0.1   1.00     1 yes  
+matrix-n512          shared       2      38.20     1.89   0.95        64        0    1.1   1.03     1 yes  
+matrix-n512          shared       4      39.96     1.80   0.45        64        0    1.8   1.19     1 yes  
+matrix-n512          shared       8      40.86     1.76   0.22        64        0    2.5   1.25     1 yes  
+matrix-n512          stealing     1      72.91     0.99   0.99        64        0    0.1   1.00     1 yes  
+matrix-n512          stealing     2      36.50     1.95   0.98        64        2    0.1   1.00     1 yes  
+matrix-n512          stealing     4      44.81     1.61   0.40        64       16    6.4   1.31     1 yes  
+matrix-n512          stealing     8      37.83     1.93   0.24        64       23    2.7   1.38     1 yes  
+matrix-n16           sequential   1       0.00     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n16           stealing     8       0.01     0.20   0.02        16        2  100.0   4.00     1 yes  
+matrix-n32           sequential   1       0.01     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n32           stealing     8       0.02     0.63   0.08        32        2   24.0   4.00     1 yes  
+matrix-n64           sequential   1       0.11     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n64           stealing     8       0.08     1.30   0.16        64        2   56.4   4.00     1 yes  
+matrix-n128          sequential   1       1.03     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n128          stealing     8       0.59     1.75   0.22        64        2   34.4   4.00     1 yes  
+matrix-n256          sequential   1       8.52     1.00   1.00         0        0    0.0   0.00     0 yes  
+matrix-n256          stealing     8       4.50     1.87   0.23        64        2   20.0   4.00     1 yes  
+bfs-random           sequential   1      35.22     1.00   1.00         0        0    0.0   0.00     0 yes  
+bfs-random           static       1      72.90     0.52   0.52        19        0    0.5   1.00     1 yes  
+bfs-random           static       2      45.99     0.81   0.40        36        0    1.5   1.06     1 yes  
+bfs-random           static       4      53.85     0.68   0.17        69        0   32.0   1.10     1 yes  
+bfs-random           static       8      52.01     0.76   0.10       133        0   55.9   1.14     1 yes  
+bfs-random           shared       1      73.67     0.49   0.49      2705        0    0.4   1.00     1 yes  
+bfs-random           shared       2      48.62     0.72   0.36      2705        0    3.5   1.05     1 yes  
+bfs-random           shared       4      46.80     0.76   0.19      2705        0   34.8   1.92     1 yes  
+bfs-random           shared       8      44.39     0.80   0.10      2705        0   63.6   1.61     1 yes  
+bfs-random           stealing     1      80.84     0.49   0.49      2705        0    0.6   1.00     1 yes  
+bfs-random           stealing     2      41.08     0.84   0.42      2705       46    0.8   1.01     1 yes  
+bfs-random           stealing     4      42.25     0.83   0.21      2705       79   36.4   1.23     1 yes  
+bfs-random           stealing     8      41.13     0.84   0.10      2705      127   62.9   1.60     1 yes  
+bfs-random-racy      sequential   1      35.59     1.00   1.00         0        0    0.0   0.00     0 yes  
+bfs-random-racy      stealing     1      74.70     0.46   0.46     10808        0    1.1   1.00     1 yes  duplicate_visits=0
+bfs-random-racy      stealing     2      67.62     0.52   0.26     10808       59   13.9   1.35     1 yes  duplicate_visits=11
+bfs-random-racy      stealing     4      62.56     0.57   0.14     10808      114   22.3   1.34     1 yes  duplicate_visits=8
+bfs-random-racy      stealing     8      62.02     0.57   0.07     10808      165   42.1   1.36     1 yes  duplicate_visits=14
+bfs-skewed           sequential   1      35.02     1.00   1.00         0        0    0.0   0.00     0 yes  
+bfs-skewed           static       1      65.35     0.55   0.55         6        0    0.2   1.00     1 yes  
+bfs-skewed           static       2      55.98     0.72   0.36        11        0    1.3   1.09     1 yes  
+bfs-skewed           static       4      51.53     0.69   0.17        21        0   14.7   1.14     1 yes  
+bfs-skewed           static       8      49.73     0.73   0.09        41        0   37.2   1.17     1 yes  
+bfs-skewed           shared       1      67.53     0.54   0.54      3331        0    0.2   1.00     1 yes  
+bfs-skewed           shared       2      44.27     0.83   0.41      3331        0    0.3   1.02     1 yes  
+bfs-skewed           shared       4      43.88     0.79   0.20      3331        0    7.7   1.29     1 yes  
+bfs-skewed           shared       8      42.16     0.84   0.10      3331        0   27.6   1.75     1 yes  
+bfs-skewed           stealing     1      65.44     0.55   0.55      3331        0    0.2   1.00     1 yes  
+bfs-skewed           stealing     2      45.20     0.78   0.39      3331       19   10.2   1.05     1 yes  
+bfs-skewed           stealing     4      44.00     0.81   0.20      3331       42   22.0   1.14     1 yes  
+bfs-skewed           stealing     8      42.20     0.83   0.10      3331       89   33.3   1.28     1 yes  
+bfs-grid             sequential   1       4.17     1.00   1.00         0        0    0.0   0.00     0 yes  
+bfs-grid             static       1      43.09     0.10   0.10      1415        0   16.4   1.00     1 yes  
+bfs-grid             static       2      29.80     0.21   0.11      2828        0   26.6   1.00     1 yes  
+bfs-grid             static       4      37.38     0.12   0.03      5648        0   70.8   1.00     1 yes  
+bfs-grid             static       8      47.80     0.13   0.02     11264        0   84.0   1.00     1 yes  
+bfs-grid             shared       1      46.80     0.11   0.11      3098        0   23.6   1.00     1 yes  
+bfs-grid             shared       2      43.39     0.10   0.05      3098        0   37.6   1.00     1 yes  
+bfs-grid             shared       4      43.07     0.10   0.03      3098        0   67.0   1.25     1 yes  
+bfs-grid             shared       8      35.47     0.12   0.02      3098        0   74.2   1.33     1 yes  
+bfs-grid             stealing     1      47.82     0.15   0.15      3098        0   25.6   1.00     1 yes  
+bfs-grid             stealing     2      35.68     0.12   0.06      3098      895   35.0   1.11     1 yes  
+bfs-grid             stealing     4      38.55     0.11   0.03      3098     1673   61.1   1.78     1 yes  
+bfs-grid             stealing     8      35.40     0.12   0.02      3098     1883   79.4   1.55     1 yes  
+chess-start-d5       sequential   1      25.24     1.00   1.00         0        0    0.0   0.00     0 yes  
+chess-start-d5       static       1      28.72     0.93   0.93        19        0    0.5   1.00     1 yes  nodes=74918 search_overhead=1.00 best=e2e4
+chess-start-d5       static       2      18.51     1.33   0.66        19        0    3.2   1.05     1 yes  nodes=74635 search_overhead=1.00 best=e2e4
+chess-start-d5       static       4      20.37     1.25   0.31        19        0    9.7   1.05     1 yes  nodes=84267 search_overhead=1.12 best=e2e4
+chess-start-d5       static       8      17.59     1.54   0.19        19        0   42.6   1.26     1 yes  nodes=89248 search_overhead=1.19 best=e2e4
+chess-start-d5       shared       1      26.71     0.97   0.97        19        0    0.5   1.00     1 yes  nodes=74918 search_overhead=1.00 best=e2e4
+chess-start-d5       shared       2      22.07     1.24   0.62        19        0    3.1   1.58     1 yes  nodes=75555 search_overhead=1.01 best=e2e4
+chess-start-d5       shared       4      24.38     1.56   0.39        19        0   12.1   1.68     1 yes  nodes=86651 search_overhead=1.16 best=e2e4
+chess-start-d5       shared       8      19.90     1.25   0.16        19        0   13.0   2.11     1 yes  nodes=62664 search_overhead=0.84 best=e2e4
+chess-start-d5       stealing     1      27.97     0.95   0.95        19        0    0.6   1.00     1 yes  nodes=74918 search_overhead=1.00 best=e2e4
+chess-start-d5       stealing     2      19.71     1.35   0.68        19        9    5.2   1.05     1 yes  nodes=74199 search_overhead=0.99 best=e2e4
+chess-start-d5       stealing     4      18.98     1.50   0.38        19       16   15.6   1.89     1 yes  nodes=80255 search_overhead=1.07 best=e2e4
+chess-start-d5       stealing     8      20.57     1.35   0.17        19       13   26.9   2.53     1 yes  nodes=95407 search_overhead=1.27 best=e2e4
+chess-middle-d5      sequential   1      78.69     1.00   1.00         0        0    0.0   0.00     0 yes  
+chess-middle-d5      static       1      80.99     1.02   1.02        36        0    0.1   1.00     1 yes  nodes=207828 search_overhead=1.00 best=f3g5
+chess-middle-d5      static       2      49.62     1.66   0.83        36        0    2.2   1.00     1 yes  nodes=228989 search_overhead=1.10 best=f3g5
+chess-middle-d5      static       4      50.33     1.70   0.42        36        0    7.3   1.00     1 yes  nodes=222230 search_overhead=1.07 best=f3g5
+chess-middle-d5      static       8      63.57     1.28   0.16        36        0   17.3   1.11     1 yes  nodes=268921 search_overhead=1.29 best=f3g5
+chess-middle-d5      shared       1      80.25     1.05   1.05        36        0    0.1   1.00     1 yes  nodes=207828 search_overhead=1.00 best=f3g5
+chess-middle-d5      shared       2      43.48     1.87   0.93        36        0    0.5   1.06     1 yes  nodes=212402 search_overhead=1.02 best=f3g5
+chess-middle-d5      shared       4      51.03     1.58   0.40        36        0    4.2   1.33     1 yes  nodes=222287 search_overhead=1.07 best=f3g5
+chess-middle-d5      shared       8      57.92     1.53   0.19        36        0    2.7   3.11     1 yes  nodes=240072 search_overhead=1.16 best=f3g5
+chess-middle-d5      stealing     1      86.06     0.98   0.98        36        0    0.1   1.00     1 yes  nodes=207828 search_overhead=1.00 best=f3g5
+chess-middle-d5      stealing     2      47.84     1.74   0.87        36       17    0.5   1.06     1 yes  nodes=207947 search_overhead=1.00 best=f3g5
+chess-middle-d5      stealing     4      54.27     1.42   0.36        36       27   14.0   1.67     1 yes  nodes=219695 search_overhead=1.06 best=f3g5
+chess-middle-d5      stealing     8      52.47     1.49   0.19        36       31   12.5   1.78     1 yes  nodes=218062 search_overhead=1.05 best=f3g5
+swarm-4000           sequential   1      64.42     1.00   1.00         0        0    0.0   0.00     0 yes  
+swarm-4000           static       1      73.15     0.92   0.92        60        0    1.5   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           static       2      54.40     1.22   0.61       120        0   11.4   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           static       4      40.28     1.66   0.42       240        0   50.5   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           static       8      46.48     1.46   0.18       480        0   75.3   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           shared       1      72.87     0.96   0.96      3840        0    1.4   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           shared       2      44.52     1.48   0.74      3840        0    5.8   1.03     1 yes  collisions=65 at_goal=27
+swarm-4000           shared       4      40.78     1.59   0.40      3840        0   45.4   1.93     1 yes  collisions=65 at_goal=27
+swarm-4000           shared       8      40.54     1.60   0.20      3840        0   66.5   1.27     1 yes  collisions=65 at_goal=27
+swarm-4000           stealing     1      77.64     0.86   0.86      3840        0    1.6   1.00     1 yes  collisions=65 at_goal=27
+swarm-4000           stealing     2      41.58     1.58   0.79      3840       85    7.9   1.02     1 yes  collisions=65 at_goal=27
+swarm-4000           stealing     4      43.75     1.51   0.38      3840      241   44.9   1.84     1 yes  collisions=65 at_goal=27
+swarm-4000           stealing     8      43.79     1.49   0.19      3840      229   68.2   1.81     1 yes  collisions=65 at_goal=27
+lang-fib24           sequential   1      63.68     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-fib24           static       1      67.97     0.98   0.98      1024        0    0.0   1.00    11 yes  par_tasks=1023
+lang-fib24           static       2      59.39     1.09   0.55      1024        0    3.2   1.00    88 yes  par_tasks=1023
+lang-fib24           static       4      55.76     1.18   0.30      1024        0   23.1   1.00   126 yes  par_tasks=1023
+lang-fib24           static       8      62.49     1.07   0.13      1024        0   45.1   1.00    70 yes  par_tasks=1023
+lang-fib24           shared       1      69.24     0.95   0.95      1024        0    0.0   1.00    11 yes  par_tasks=1023
+lang-fib24           shared       2      62.09     1.09   0.54      1024        0    0.8   1.12   290 yes  par_tasks=1023
+lang-fib24           shared       4      53.52     1.19   0.30      1024        0    1.7   1.20   132 yes  par_tasks=1023
+lang-fib24           shared       8      58.70     1.08   0.13      1024        0    1.7   2.00   123 yes  par_tasks=1023
+lang-fib24           stealing     1      60.55     1.02   1.02      1024        0    0.0   1.00    11 yes  par_tasks=1023
+lang-fib24           stealing     2      51.82     1.21   0.60      1024        7    2.2   1.15    10 yes  par_tasks=1023
+lang-fib24           stealing     4      53.45     1.23   0.31      1024       18    4.2   1.35    12 yes  par_tasks=1023
+lang-fib24           stealing     8      55.88     1.13   0.14      1024       36   19.4   2.62    12 yes  par_tasks=1023
+lang-cut1            sequential   1      64.32     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut1            shared       8      72.73     0.96   0.12         2        0   38.1   4.00     1 yes  par_tasks=1
+lang-cut1            stealing     8      68.39     1.20   0.15         2        2   42.9   4.00     1 yes  par_tasks=1
+lang-cut4            sequential   1      66.26     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut4            shared       8      57.90     1.11   0.14        16        0   17.0   2.00     3 yes  par_tasks=15
+lang-cut4            stealing     8      61.21     1.13   0.14        16       10   14.9   1.50     3 yes  par_tasks=15
+lang-cut8            sequential   1      63.22     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut8            shared       8      58.80     1.11   0.14       256        0    4.1   1.94    29 yes  par_tasks=255
+lang-cut8            stealing     8      62.36     1.17   0.15       256       29    1.6   2.03     7 yes  par_tasks=255
+lang-cut12           sequential   1      65.79     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut12           shared       8      65.16     1.03   0.13      4096        0   16.6   1.53   320 yes  par_tasks=4095
+lang-cut12           stealing     8      59.85     1.12   0.14      4096       50    2.5   2.09    14 yes  par_tasks=4095
+lang-cut16           sequential   1      62.98     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut16           shared       8     110.12     0.58   0.07     45288        0   25.7   1.45  2175 yes  par_tasks=45287
+lang-cut16           stealing     8      56.81     1.13   0.14     45288       72   14.5   1.29    20 yes  par_tasks=45287
+lang-cut20           sequential   1      64.65     1.00   1.00         0        0    0.0   0.00     0 yes  
+lang-cut20           shared       8     169.93     0.40   0.05     74791        0   26.9   1.24  4469 yes  par_tasks=74790
+lang-cut20           stealing     8      75.96     0.89   0.11     74791       83    2.3   1.66    27 yes  par_tasks=74790

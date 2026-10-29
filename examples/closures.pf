@@ -1,0 +1,6 @@
+# Functions are values: make_adder returns a new function.
+let make_adder n = fun x -> x + n in
+let add10 = make_adder 10 in
+let compose f g = fun x -> f (g x) in
+let twice f = compose f f in
+(twice add10 1, fst (par(add10 5, add10 6)))
